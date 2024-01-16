@@ -1,0 +1,6 @@
+@OrleansURLShortener_HostAddress = http://localhost:5181
+
+GET {{OrleansURLShortener_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
