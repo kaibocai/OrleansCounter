@@ -22,3 +22,29 @@ siloBuilder
 .UseAzureStorageClustering(o => o.ConfigureTableServiceClient(connectionString))
 .AddAzureTableGrainStorage("urls", o => o.ConfigureTableServiceClient(connectionString));
 ```
+
+
+### Configuration used to deploy to Azure container app (use azure sql server as storage)
+```c#
+// Use ADO.NET
+var invariant = "System.Data.SqlClient";
+var connectionString = "sql server connection string";
+// Use ADO.NET for clustering
+siloBuilder.UseAdoNetClustering(options =>
+{
+    options.Invariant = invariant;
+    options.ConnectionString = connectionString;
+});
+// Use ADO.NET for reminder service
+siloBuilder.UseAdoNetReminderService(options =>
+{
+    options.Invariant = invariant;
+    options.ConnectionString = connectionString;
+});
+// Use ADO.NET for persistence
+siloBuilder.AddAdoNetGrainStorage("urls", options =>
+{
+    options.Invariant = invariant;
+    options.ConnectionString = connectionString;
+});
+```

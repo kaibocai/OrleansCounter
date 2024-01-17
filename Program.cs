@@ -16,7 +16,6 @@ builder.Host.UseOrleans((ctx, siloBuilder) =>
         // aks configuration
         //// In Kubernetes, we use environment variables and the pod manifest
         //siloBuilder.UseKubernetesHosting();
-
         //// Use Redis for clustering & persistence
         //var redisConnectionString = $"{Environment.GetEnvironmentVariable("REDIS")}:6379";
         //siloBuilder.UseRedisClustering(options => options.ConnectionString = redisConnectionString);
@@ -24,15 +23,37 @@ builder.Host.UseOrleans((ctx, siloBuilder) =>
 
 
         // container app configuration
-        var connectionString = "azure storage connection string";
-        siloBuilder
-        .UseAzureStorageClustering(o => o.ConfigureTableServiceClient(connectionString))
-        .AddAzureTableGrainStorage("urls", o => o.ConfigureTableServiceClient(connectionString));
+        //var connectionString = "azure storage connection string";
+        //siloBuilder
+        //.UseAzureStorageClustering(o => o.ConfigureTableServiceClient(connectionString))
+        //.AddAzureTableGrainStorage("urls", o => o.ConfigureTableServiceClient(connectionString));
 
-        siloBuilder.Configure<ClusterOptions>(options =>
+        //siloBuilder.Configure<ClusterOptions>(options =>
+        //{
+        //    options.ClusterId = "urls-counter";
+        //    options.ServiceId = "urls";
+        //});
+
+        // Use ADO.NET
+        var invariant = "System.Data.SqlClient";
+        var connectionString = "sql server connection string";
+        // Use ADO.NET for clustering
+        siloBuilder.UseAdoNetClustering(options =>
         {
-            options.ClusterId = "urls-counter";
-            options.ServiceId = "urls";
+            options.Invariant = invariant;
+            options.ConnectionString = connectionString;
+        });
+        // Use ADO.NET for reminder service
+        siloBuilder.UseAdoNetReminderService(options =>
+        {
+            options.Invariant = invariant;
+            options.ConnectionString = connectionString;
+        });
+        // Use ADO.NET for persistence
+        siloBuilder.AddAdoNetGrainStorage("urls", options =>
+        {
+            options.Invariant = invariant;
+            options.ConnectionString = connectionString;
         });
     }
 });

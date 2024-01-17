@@ -12,14 +12,18 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Orleans.Clustering.AdoNet" Version="8.0.0" />
     <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="8.0.0" />
     <PackageReference Include="Microsoft.Orleans.Hosting.Kubernetes" Version="7.2.4" />
+    <PackageReference Include="Microsoft.Orleans.Persistence.AdoNet" Version="8.0.0" />
     <PackageReference Include="Microsoft.Orleans.Persistence.AzureStorage" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Orleans.Reminders.AdoNet" Version="8.0.0" />
     <PackageReference Include="Microsoft.Orleans.Server" Version="7.2.4" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
     <PackageReference Include="Orleans.Clustering.Redis" Version="7.0.0" />
     <PackageReference Include="Orleans.Persistence.Redis" Version="7.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
   </ItemGroup>
 
 </Project>
