@@ -25,6 +25,10 @@ siloBuilder
 
 
 ### Configuration used to deploy to Azure container app (use azure sql server as storage)
+scripts to be run:
+1. configuration scripts: https://learn.microsoft.com/en-us/dotnet/orleans/host/configuration-guide/adonet-configuration
+2. migration scripts: https://github.com/dotnet/orleans/blob/main/src/AdoNet/Orleans.Clustering.AdoNet/Migrations/SQLServer-Clustering-3.7.0.sql
+reference: https://github.com/dotnet/orleans/issues/8216
 ```c#
 // Use ADO.NET
 var invariant = "System.Data.SqlClient";
